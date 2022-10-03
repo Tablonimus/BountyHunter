@@ -1,0 +1,13 @@
+
+#Home {
+  background-image: url("../../assets/images/backgroundfocus.png");
+  background-repeat: no-repeat;
+  background-position: cover;
+  background-attachment:fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-items: center;
+  justify-content: center;
+}

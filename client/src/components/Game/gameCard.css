@@ -1,0 +1,36 @@
+body {
+  background-image: url("../../assets/images/backgroundGame.png");
+  background-repeat: no-repeat;
+  background-position: cover;
+  background-attachment:fixed;
+  background-size: cover;
+}
+
+.want {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../assets/images/wanted.png");
+  background-repeat: no-repeat;
+  background-position: cover;
+  /* background-attachment:scroll; */
+  background-size: cover;
+  height: 18em;
+  width: 14em;
+  margin:2px;
+  border-radius: 5px;
+}
+.wantClue {
+  display: flex;
+  flex-direction: column;
+
+  background-image: url("../../assets/images/cartelGame.png");
+  background-repeat: no-repeat;
+  height: 55rem;
+  width: 55rem;
+  /* background-attachment:scroll; */
+  
+  
+  
+}
