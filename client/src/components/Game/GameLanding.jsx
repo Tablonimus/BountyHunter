@@ -312,7 +312,7 @@ export default function Home() {
               </h3>
               <div className="flex justify-center gap-4">
                 <Button color="success" onClick={playAgainClick}>
-                  Yes, I'm prepared
+                  Yes, Continue...
                 </Button>
                 <Button color="gray" onClick={onClick}>
                   No
