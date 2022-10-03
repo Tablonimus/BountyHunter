@@ -23,7 +23,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const reward = useSelector((state) => state.rewardCriminals);
   const randomClue = Math.floor(Math.random() * reward?.length);
@@ -64,7 +64,7 @@ export default function Home() {
   }
 
   function onClick() {
-  navigate("/")
+    navigate("/");
   }
 
   function onClose() {
@@ -298,51 +298,50 @@ export default function Home() {
           ) : (
             false
           )}
+          {/* CORRECT ANSWER MESSAGE */}
+
+          <Modal show={correct} size="md" popup={true} onClose={onClose}>
+            <Modal.Header />
+            <Modal.Body>
+              <div className="text-center bg-green-500 rounded-lg p-5">
+                <img src={correctt} alt="" className="w-10" />
+                <h3 className="mb-5 text-lg font-bold text-white dark:text-gray-400">
+                  Hunting Successful! Play Again?
+                </h3>
+                <div className="flex justify-center gap-4">
+                  <Button color="success" onClick={playAgainClick}>
+                    Yes, Continue...
+                  </Button>
+                  <Button color="gray" onClick={onClick}>
+                    No
+                  </Button>
+                </div>
+              </div>
+            </Modal.Body>
+          </Modal>
+
+          {/* WRONG ANSWER MESSAGE */}
+
+          <Modal show={wrongAnswer} size="md" popup={true} onClose={onClose}>
+            <Modal.Header />
+            <Modal.Body>
+              <div className="text-center bg-red-500 rounded-lg p-5 ">
+                <img src={incorrect} alt="" className="w-10" />
+                <h3 className="mb-5 text-lg font-bold text-white dark:text-gray-400">
+                  Wrong Answer! Play Again?
+                </h3>
+                <div className="flex justify-center gap-4">
+                  <Button color="success" onClick={playAgainClick}>
+                    Yes, I'm prepared
+                  </Button>
+                  <Button color="gray" onClick={onClick}>
+                    No
+                  </Button>
+                </div>
+              </div>
+            </Modal.Body>
+          </Modal>
         </div>
-
-        {/* CORRECT ANSWER MESSAGE */}
-
-        <Modal show={correct} size="md" popup={true} onClose={onClose}>
-          <Modal.Header />
-          <Modal.Body>
-          <div className="text-center bg-green-500 rounded-lg p-5">
-            <img src={correctt} alt="" className="w-10"/>
-              <h3 className="mb-5 text-lg font-bold text-white dark:text-gray-400">
-                Hunting Successful! Play Again?
-              </h3>
-              <div className="flex justify-center gap-4">
-                <Button color="success" onClick={playAgainClick}>
-                  Yes, Continue...
-                </Button>
-                <Button color="gray" onClick={onClick}>
-                  No
-                </Button>
-              </div>
-            </div>
-          </Modal.Body>
-        </Modal>
-
-        {/* WRONG ANSWER MESSAGE */}
-
-        <Modal show={wrongAnswer} size="md" popup={true} onClose={onClose}>
-          <Modal.Header />
-          <Modal.Body>
-            <div className="text-center bg-red-500 rounded-lg p-5 ">
-            <img src={incorrect} alt="" className="w-10"/>
-              <h3 className="mb-5 text-lg font-bold text-white dark:text-gray-400">
-                Wrong Answer! Play Again?
-              </h3>
-              <div className="flex justify-center gap-4">
-                <Button color="success" onClick={playAgainClick}>
-                  Yes, I'm prepared
-                </Button>
-                <Button color="gray" onClick={onClick}>
-                  No
-                </Button>
-              </div>
-            </div>
-          </Modal.Body>
-        </Modal>
       </div>
       <NavBarGame />
     </div>
