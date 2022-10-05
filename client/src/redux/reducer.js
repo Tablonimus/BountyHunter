@@ -4,7 +4,6 @@ const initialState = {
   allCriminals: [],
   rewardCriminals: [],
   level1: [],
-
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -38,6 +37,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         incorrectAnswer2: payload,
+      };
+    }
+    case action.POST_CRIMINAL: {
+      return {
+        ...state,
       };
     }
 

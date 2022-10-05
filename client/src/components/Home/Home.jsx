@@ -9,7 +9,7 @@ export default function Home() {
   
   const reward = useSelector((state) => state.rewardCriminals);
 
-  console.log("reawe", reward);
+
   //PAGINATION---
   const [currentPage, setCurrentPage] = useState(1);
   const [criminalsPerPage, setCriminalsPerPage] = useState(24);
@@ -41,6 +41,7 @@ export default function Home() {
                 id={criminal?.uid}
                 reward_text={criminal.reward_text}
                 images={criminal.images}
+                image={criminal.image}
                 url={criminal.url}
                 title={criminal.title}
                 subjects={criminal.subjects}

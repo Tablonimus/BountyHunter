@@ -5,11 +5,11 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { notificationSwal } from "./notificationSwal.jsx";
-
+import { postCharacter } from "../../redux/actions/index.js";
 import axios from "axios";
 import "./create.css";
 
-export default function RegisterPet() {
+export default function CreateCharacter() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,13 +23,13 @@ export default function RegisterPet() {
     image: "",
     gender: "",
     subjects: "",
-    reward: "",
+    reward_text: "",
   });
 
   function handleChange(e) {
     setInput({
       ...input,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.toString(),
     });
     setErrors(
       validate({
@@ -70,109 +70,125 @@ export default function RegisterPet() {
     if (input.title) {
       if (!/^[a-zA-Z\s]+$/.test(input.title)) {
         errors.title = "Only letters allowed!";
-      } else if (input.name.length > 50) {
-        errors.title = "The name cannot be longer than 20 characters!";
+      } else if (input?.name?.length > 50) {
+        errors.title = "The name cannot be longer than 50 characters!";
       }
-    } else errors.name = "*";
+    } else errors.title = "*";
 
     if (!input.image) errors.image = "*";
 
     if (!input.classification) errors.classification = "*";
 
     if (!input.gender) errors.gender = "*";
-    if (!input.subjects || input.subjects.length > 200) errors.gender = "*";
+    if (!input.subjects || input?.subjects?.length > 200) errors.subjects = "*";
 
-    if (input.reward) {
-      if (isNaN(input.reward)) errors.reward = "Only Numbers Allowed";
-      if (/[  +]$/.test(input.reward)) errors.reward = "Only Numbers Allowed!";
+    if (input.reward_text) {
+      if (isNaN(input.reward_text)) errors.reward_text = "Only Numbers Allowed";
+      if (/[  +]$/.test(input.reward_text)) errors.reward_text = "Only Numbers Allowed!";
       if (!Number.isInteger(Number(input.age))) errors.age = "Only integers!";
       if (
-        parseInt(input.reward) < 0 ||
-        parseInt(input.reward) > 10000000 ||
-        parseInt(input.reward) === 0
+        parseInt(input.reward_text) < 0 ||
+        parseInt(input.reward_text) > 10000000 ||
+        parseInt(input.reward_text) === 0
       )
-        errors.reward = "Must be between 1 than 10M!";
-    } else errors.reward = "*";
+        errors.reward_text = "Must be between 1 than 10M!";
+    } else errors.reward_text = "*";
 
     return errors;
   }
 
-  //   function handleSubmit(e) {
-  //     e.preventDefault();
-  //     if (have() === false) {
-  //       Swal.fire({
-  //         title: "¿Está seguro de que desea crear esta mascota?",
-  //         text: "Esta mascota se publicará en adopción",
-  //         icon: "warning",
-  //         showCancelButton: true,
-  //         cancelButtonText: "No",
-  //         confirmButtonText: "Sí",
-  //       }).then((result) => {
-  //         if (result.isConfirmed) {
-  //           let id = input.id;
-  //           delete input.id;
-  //           dispatch(postPet(id, input)).then((e) => {
-  //             if (e === "Mascota creada correctamente") {
-  //               notificationSwal(
-  //                 "¡Enhorabuena!",
-  //                 "Mascota creada con éxito",
-  //                 "success",
-  //                 "Ok"
-  //               );
-  //               navigate("/home");
-  //             } else {
-  //               notificationSwal(
-  //                 "¡Ooops!",
-  //                 "No se pudo crear la mascota, intente mas tarde",
-  //                 "error",
-  //                 "Aceptar"
-  //               );
-  //             }
-  //           });
-  //         } else {
-  //           notificationSwal(
-  //             "Operación cancelada",
-  //             "Mascota no creada",
-  //             "error",
-  //             "Aceptar"
-  //           )
-  //         }
-  //       }).then(() => {
-  //         navigate("/home")
-  //       });
+  const have = () => {
+    if (
+      !input.title ||
+      !input.subjects ||
+      !input.image ||
+      !input.gender ||
+      !input.reward_text
+    ) {
+      return true;
+    } else if (
+      input.title &&
+      input.subjects &&
+      input.image &&
+      input.gender &&
+      input.reward_text
+    ) {
+      return false;
+    } else {
+      return "e";
+    }
+  };
 
-  //       setInput({
-  //         id: "",
-  //         name: "",
-  //         image: "",
-  //         imagePool: [],
-  //         type: "",
-  //         description: "",
-  //         size: "",
-  //         age: 0,
-  //         vaccination: "",
-  //         castrated: false,
-  //         gender: "",
-  //         place: "",
-  //         place_longitude: "",
-  //         place_latitude: "",
-  //       });
-  //       setImage("");
-  //     } else if (have() === "e") {
-  //       notificationSwal(
-  //         "¡Faltan datos!",
-  //         "Complete todos los campos obligatorios",
-  //         "error",
-  //         "Aceptar"
-  //       );
-  //     } else
-  //       notificationSwal(
-  //         "¡Hay errores!",
-  //         "Corríjalos por favor",
-  //         "error",
-  //         "Aceptar"
-  //       );
-  //   }
+  console.log(have());
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (have() === false) {
+      Swal.fire({
+        title: "Form successfully filled",
+        text: "You will create a new criminal file",
+        icon: "warning",
+        showCancelButton: true,
+        cancelButtonText: "No",
+        confirmButtonText: "Yes",
+      })
+        .then((result) => {
+          if (result.isConfirmed) {
+            dispatch(postCharacter(input)).then((e) => {
+              if (e === "Criminal created") {
+                notificationSwal(
+                  "¡Well Done!",
+                  "Criminal created successfully",
+                  "success",
+                  "Ok"
+                );
+                navigate("/home");
+              } else {
+                notificationSwal(
+                  "¡Ooops!",
+                  "The file could not be created, please try again later",
+                  "error",
+                  "Acept"
+                );
+              }
+            });
+          } else {
+            notificationSwal(
+              "Aborted operation",
+              "Criminal not created",
+              "error",
+              "Acept"
+            );
+          }
+        })
+        .then(() => {
+          navigate("/home");
+        });
+
+      setInput({
+        title: "",
+        classification: "",
+        image: "",
+        gender: "",
+        subjects: "",
+        reward_text: "",
+      });
+      setImage("");
+    } else if (have() === "e") {
+      notificationSwal(
+        "¡Missing Data!",
+        "Full fill the form correctly",
+        "error",
+        "Acept"
+      );
+    } else
+      notificationSwal(
+        "¡Form with errors!",
+        "Correct them, please.",
+        "error",
+        "Acept"
+      );
+  }
 
   // function handleDelete(event) {
   //   setInput({
@@ -192,6 +208,8 @@ export default function RegisterPet() {
   //   return key++;
   // }
 
+  console.log(input);
+
   return (
     <div className="flex flex-col lg:flex-col-2 items-center">
       <div id="form" className="flex flex-col items-center ">
@@ -200,7 +218,7 @@ export default function RegisterPet() {
         </div>
 
         <div className="w-80 ml-4 max-w-lg self-center">
-          <form /* onSubmit={handleSubmit} */>
+          <form onSubmit={handleSubmit}>
             <div className=" bg-black rounded-md border opacity-70 shadow-lg">
               <label className="font-bold flex text-white text-xl">
                 Title:{" "}
@@ -305,7 +323,7 @@ export default function RegisterPet() {
               </fieldset>
             </div>
 
-            <div className=" bg-black rounded-md border opacity-70 shadow-lg">
+            <div className=" bg-black rounded-md border opacity-90 shadow-lg">
               <label className="font-bold flex text-white text-xl">
                 Image:{" "}
                 {errors.image && (
@@ -318,7 +336,7 @@ export default function RegisterPet() {
                 type="file"
                 name="image"
                 accept=".jpg, .png, .jpeg"
-                /*         onChange={(e) => handleImage(e)} */
+                onChange={(e) => handleImage(e)}
                 className="w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
               />
               {loadingImage ? (
@@ -351,17 +369,17 @@ export default function RegisterPet() {
 
             <div className=" bg-black rounded-md border opacity-70 shadow-lg">
               <label className="font-bold flex text-white text-xl">
-                Reward:{" "}
-                {errors.reward && (
+                Reward_text:{" "}
+                {errors.reward_text && (
                   <p className="font-bold text-sm text-red-700 text-center p-2">
-                    {errors.reward}
+                    {errors.reward_text}
                   </p>
                 )}
               </label>
               <input
                 type="text"
-                name="reward"
-                value={input.reward}
+                name="reward_text"
+                value={input.reward_text}
                 onChange={(e) => handleChange(e)}
                 placeholder="$...."
                 className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-yellow-800 focus:border-transparent"
@@ -373,14 +391,14 @@ export default function RegisterPet() {
                 type="submit"
                 className="py-2 px-4 my-2 w-full bg-yellow-900 hover:bg-yellow-900 focus:ring-yellow-900 focus:ring-offset-yellow-200 text-white w-30 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
               >
-                Crear
+                Create File
               </button>
             </div>
           </form>
 
           <Link to="/home">
             <button className="py-2 px-4 w-full bg-yellow-900 hover:bg-yellow-900 focus:ring-yellow-900 focus:ring-offset-yellow-200 text-white w-30 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
-              Regresar
+              Go back
             </button>
           </Link>
         </div>

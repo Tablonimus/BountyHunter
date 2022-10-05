@@ -7,16 +7,17 @@ export default function RewardCard(
   title,
   reward_text,
   images,
+  image,
   url,
   subjects
 ) {
-  let numbers = id.reward_text
+  let numbers = id?.reward_text
     .split("")
     .filter((char) => (!isNaN(char) ? char : false))
     .join("")
     .trim()
     .split(" ");
-  console.log(numbers);
+ 
   return (
     <div className="homeCard">
       <a href={id.url} target="_blank">
@@ -24,7 +25,7 @@ export default function RewardCard(
           <Tooltip content="Go to FBI summary" placement="top" trigger="hover">
             <div className="bg--500 mt-20 h-40 w-40">
               <img
-                src={id.images[0].thumb}
+                src={id.image || id.images[0].thumb}
                 alt="Protected Image"
                 className="w-40 h-40 object-cover"
               />

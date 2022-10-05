@@ -2,26 +2,27 @@ const { Router } = require("express");
 const sequelize = require("sequelize");
 const axios = require("axios");
 const router = Router();
-//Controllers
-const { getFBIcriminals } = require("../controllers/criminalControllers");
+const { getAllCriminals, postCriminal } = require("../controllers/criminalControllers");
 
 router.get("/", async (req, res) => {
   try {
-    //const getCriminals = await getFBIcriminals();
-    //
-
-    console.log("ENTRANDO");
-    // const dataFBI = await axios.get("https://api.fbi.gov/wanted/v1/list");//---
-    // console.log("saliendo");
-
-    // console.log(dataFBI.data.items);
-    res.status(201).json("data");
-    // res.status(200).json("PRUEBA")
-
-    // if (title)
+    const criminals = await getAllCriminals();
+    res.status(201).json(criminals);
   } catch (error) {
     res.status(400).json(error.message);
   }
 });
+
+router.post("/",async(req,res)=>{
+  const {title, classification,gender,image,subjects,reward_text}= req.body;
+  try {
+    const criminal = await postCriminal(
+      title, classification,gender,image,subjects,reward_text
+    )
+    res.status(201).json("Criminal created");
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+})
 
 module.exports = router;

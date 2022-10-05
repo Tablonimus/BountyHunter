@@ -1,5 +1,6 @@
 import * as action from "../actions/actionTypes";
 import axios from "axios";
+import { bindActionCreators } from "redux";
 //------------GET CRIMINALS-------------------
 export function getAllCriminals() {
   return async function (dispatch) {
@@ -14,8 +15,8 @@ export function getAllCriminals() {
 
       const dataFBI = await Promise.all(promisedLinks);
       const criminals = dataFBI.map((criminals) => criminals.data).flat();
+ 
       const payload = criminals.map((criminal) => criminal.items).flat();
-
       return dispatch({ type: action.GET_ALL_FBI, payload: payload });
     } catch (error) {
       console.log(error, "Error on getAllCriminals");
@@ -43,7 +44,13 @@ export function getRewardCriminals() {
           0 /* && crimi?.subjects?.includes("Kidnappings") */
       );
 
-      return dispatch({ type: action.GET_REWARD_FBI, payload: payloadReward });
+      const getDbCriminals = await axios.get("http://localhost:3001/criminal");
+      const dbCriminals = getDbCriminals.data;
+      const allCriminals = [dbCriminals,payloadReward]
+
+      console.log("NDNDNASKDASKDASODSAJKDSAJK", allCriminals.flat());
+
+      return dispatch({ type: action.GET_REWARD_FBI, payload: allCriminals.flat() });
     } catch (error) {
       console.log(error, "Error on getAllCriminals");
     }
@@ -77,10 +84,26 @@ export function getLevel1() {
           criminal.description !== null &&
           criminal.occupations !== null
       );
-      console.log("PAYLOAD LEVEL1", level1);
+
       return dispatch({ type: action.LOAD_LEVEL1, payload: level1 });
     } catch (error) {
       console.log(error, "Error on getAllCriminals");
+    }
+  };
+}
+
+//----------POST CHARACTER---------
+export function postCharacter(payload) {
+  return async function (dispatch) {
+    try {
+      let json = await axios.post("http://localhost:3001/criminal", payload);
+      dispatch({
+        type: action.POST_CRIMINAL,
+        payload: json.data,
+      });
+      return "Criminal created";
+    } catch (error) {
+      return "Server Error, try again later";
     }
   };
 }
