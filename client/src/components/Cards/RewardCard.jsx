@@ -20,6 +20,7 @@ export default function RewardCard(
  
   return (
     <div className="homeCard">
+      
       <a href={id.url} target="_blank">
         <div className="flex  flex-col items-center justify-center">
           <Tooltip content="Go to FBI summary" placement="top" trigger="hover">

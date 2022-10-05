@@ -1,7 +1,7 @@
 import * as action from "../actions/actionTypes";
 import axios from "axios";
 import { bindActionCreators } from "redux";
-//------------GET CRIMINALS-------------------
+//------------GET CRIMINALS------not used-------------
 export function getAllCriminals() {
   return async function (dispatch) {
     try {
@@ -15,7 +15,7 @@ export function getAllCriminals() {
 
       const dataFBI = await Promise.all(promisedLinks);
       const criminals = dataFBI.map((criminals) => criminals.data).flat();
- 
+
       const payload = criminals.map((criminal) => criminal.items).flat();
       return dispatch({ type: action.GET_ALL_FBI, payload: payload });
     } catch (error) {
@@ -24,7 +24,7 @@ export function getAllCriminals() {
   };
 }
 //-----------REWARDS FILTER---------------
-export function getRewardCriminals() {
+export function getRewardCriminals(input) {
   return async function (dispatch) {
     try {
       const nPage = 49;
@@ -44,18 +44,36 @@ export function getRewardCriminals() {
           0 /* && crimi?.subjects?.includes("Kidnappings") */
       );
 
-      const getDbCriminals = await axios.get("https://bounty-hunter-newapp.herokuapp.com/criminal");
-      const dbCriminals = getDbCriminals.data;
-      const allCriminals = [dbCriminals,payloadReward]
-
-
-
-      return dispatch({ type: action.GET_REWARD_FBI, payload: allCriminals.flat() });
+      const getDbCriminals = await axios.get(
+        "https://bounty-hunter-newapp.herokuapp.com/criminal"
+      );
+      const dbCriminals = getDbCriminals.data.reverse();
+      const allCriminals = [dbCriminals, payloadReward];
+      const searched = allCriminals
+        .flat()
+        .filter(
+          (criminal) =>
+            criminal.title?.toLowerCase().includes(input?.toLowerCase()) ||
+            criminal.reward_text?.toLowerCase().includes(input?.toLowerCase()) ||
+            criminal.subjects?.includes(input?.toLowerCase()) ||
+            criminal.description?.toLowerCase().includes(input?.toLowerCase()) ||
+            criminal.eyes_raw?.toLowerCase().includes(input?.toLowerCase()) ||
+            criminal.hair_raw?.toLowerCase().includes(input?.toLowerCase()) ||
+            criminal.locations?.includes(input) ||
+            criminal.occupations?.includes(input) ||
+            criminal.race_raw?.toLowerCase().includes(input?.toLowerCase()) ||
+            criminal.scars_and_marks?.toLowerCase().includes(input?.toLowerCase()) 
+        );
+      return dispatch({
+        type: action.GET_REWARD_FBI,
+        payload: input?.length===0 ||searched?.length> 0 ? searched : allCriminals.flat(),
+      });
     } catch (error) {
       console.log(error, "Error on getAllCriminals");
     }
   };
 }
+
 //-----------LEVEL 1--------
 export function getLevel1() {
   return async function (dispatch) {
@@ -96,7 +114,10 @@ export function getLevel1() {
 export function postCharacter(payload) {
   return async function (dispatch) {
     try {
-      let json = await axios.post("https://bounty-hunter-newapp.herokuapp.com/criminal", payload);
+      let json = await axios.post(
+        "https://bounty-hunter-newapp.herokuapp.com/criminal",
+        payload
+      );
       dispatch({
         type: action.POST_CRIMINAL,
         payload: json.data,
