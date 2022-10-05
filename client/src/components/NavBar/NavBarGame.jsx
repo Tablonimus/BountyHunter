@@ -13,7 +13,7 @@ export default function NavBarGame() {
 
       <div className="flex flex-col items-center m-2 md:order-2">
       <img src={bounty} className="m-2 w-24" alt="Flowbite Logo" />
-        <Link to="/game">
+        <Link to="/game" className="mb-2">
           <Button color={"warning"}>Select Level</Button>
         </Link>
         <Link to="/">
