@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import RewardCard from "../Cards/RewardCard";
 import NavBarHome from "../NavBar/NavBarHome";
 import Pagination from "../Pagination/Pagination";
 import "./Home.css";
 
 export default function Home() {
-  
+  const dispatch = useDispatch()
+  // useEffect(()=>
+  // {dispatch()})
   const reward = useSelector((state) => state.rewardCriminals);
 
 
