@@ -367,6 +367,7 @@ export default function CreateCharacter() {
                 type="text"
                 name="reward_text"
                 value={input.reward_text}
+                maxLength="8"
                 onChange={(e) => handleChange(e)}
                 placeholder="$...."
                 className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-yellow-800 focus:border-transparent"
