@@ -20,7 +20,7 @@ export default function CharacterDetail(
   //   .split(" ");
  
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full flex flex-col">
       <NavBarHome/>
 
       <h1 className="text-5xl">DETAIL FEATURE INCOMING</h1>
