@@ -38,7 +38,7 @@ function App() {
         <Route path={"/game/level2"} element={<Level2 />} />
         <Route path={"/game/level3"} element={<Level3 />} />
         <Route path={"/newcharacter"} element={<CreateCharacter />} />
-        <Route path={"/characterdetail/:name"} element={<CharacterDetail />} />
+        <Route path={"/characterdetail/:title"} element={<CharacterDetail />} />
       </Routes>
     </BrowserRouter>
   );

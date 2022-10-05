@@ -54,19 +54,28 @@ export function getRewardCriminals(input) {
         .filter(
           (criminal) =>
             criminal.title?.toLowerCase().includes(input?.toLowerCase()) ||
-            criminal.reward_text?.toLowerCase().includes(input?.toLowerCase()) ||
+            criminal.reward_text
+              ?.toLowerCase()
+              .includes(input?.toLowerCase()) ||
             criminal.subjects?.includes(input?.toLowerCase()) ||
-            criminal.description?.toLowerCase().includes(input?.toLowerCase()) ||
+            criminal.description
+              ?.toLowerCase()
+              .includes(input?.toLowerCase()) ||
             criminal.eyes_raw?.toLowerCase().includes(input?.toLowerCase()) ||
             criminal.hair_raw?.toLowerCase().includes(input?.toLowerCase()) ||
             criminal.locations?.includes(input) ||
             criminal.occupations?.includes(input) ||
             criminal.race_raw?.toLowerCase().includes(input?.toLowerCase()) ||
-            criminal.scars_and_marks?.toLowerCase().includes(input?.toLowerCase()) 
+            criminal.scars_and_marks
+              ?.toLowerCase()
+              .includes(input?.toLowerCase())
         );
       return dispatch({
         type: action.GET_REWARD_FBI,
-        payload: input?.length===0 ||searched?.length> 0 ? searched : allCriminals.flat(),
+        payload:
+          input?.length === 0 || searched?.length > 0
+            ? searched
+            : allCriminals.flat(),
       });
     } catch (error) {
       console.log(error, "Error on getAllCriminals");
@@ -129,6 +138,13 @@ export function postCharacter(payload) {
   };
 }
 //------------GET DETAIL---------
-export function getDetail(payload){
-  
+export function getDetail(title) {
+  return async (dispatch) => {
+    return await axios
+      .get(`https://bounty-hunter-newapp.herokuapp.com/criminal/${title}`)
+      .then((json) =>
+        dispatch({ type: action.DETAIL_CRIMINAL, payload: json.data })
+      )
+      .catch((error) => console.log(error));
+  };
 }

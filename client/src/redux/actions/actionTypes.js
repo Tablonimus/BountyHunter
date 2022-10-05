@@ -8,3 +8,5 @@ export const LOAD_LEVEL1 = "LOAD_LEVEL1";
 export const LOAD_LEVEL2 = "LOAD_LEVEL2";
 export const LOAD_LEVEL3 = "LOAD_LEVEL3";
 export const POST_CRIMINAL = "POST_CRIMINAL";
+export const DETAIL_CRIMINAL = "DETAIL_CRIMINAL";
+export const CLEAR_STATE = "CLEAR_STATE";
