@@ -10,7 +10,9 @@ export default function NavBarHome() {
       fluid={true}
       class="bg-[#6D4A33] rounded-t-lg shadow-lg flex justify-between"
     >
+      <Link to="/">
       <img src={bounty} className="m-2 w-24" alt="Flowbite Logo" />
+      </Link>
       <span className="mt-5 self-center whitespace-nowrap text-xl font-semibold dark:text-white">
         <SearchBar />
       </span>

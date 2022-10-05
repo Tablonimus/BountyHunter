@@ -57,18 +57,7 @@ export function getRewardCriminals(input) {
             criminal.reward_text
               ?.toLowerCase()
               .includes(input?.toLowerCase()) ||
-            criminal.subjects?.includes(input?.toLowerCase()) ||
-            criminal.description
-              ?.toLowerCase()
-              .includes(input?.toLowerCase()) ||
-            criminal.eyes_raw?.toLowerCase().includes(input?.toLowerCase()) ||
-            criminal.hair_raw?.toLowerCase().includes(input?.toLowerCase()) ||
-            criminal.locations?.includes(input) ||
-            criminal.occupations?.includes(input) ||
-            criminal.race_raw?.toLowerCase().includes(input?.toLowerCase()) ||
-            criminal.scars_and_marks
-              ?.toLowerCase()
-              .includes(input?.toLowerCase())
+            criminal.subjects?.includes(input?.toLowerCase())
         );
       return dispatch({
         type: action.GET_REWARD_FBI,

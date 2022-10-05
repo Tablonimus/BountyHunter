@@ -15,6 +15,9 @@ export default function CreateCharacter() {
 
   const [errors, setErrors] = useState({});
   const [image, setImage] = useState("");
+  const [urll, setUrll] = useState(
+    "https://bountyhunter2.vercel.app/characterdetail"
+  );
   const [loadingImage, setLoadingImage] = useState(false);
 
   const [input, setInput] = useState({
@@ -24,7 +27,7 @@ export default function CreateCharacter() {
     gender: "",
     subjects: "",
     reward_text: "",
-    url:""
+    urlocal: urll,
   });
 
   function handleChange(e) {
@@ -32,7 +35,6 @@ export default function CreateCharacter() {
       ...input,
       [e.target.name]: e.target.value.toString(),
     });
-
     setErrors(
       validate({
         ...input,
@@ -86,7 +88,8 @@ export default function CreateCharacter() {
 
     if (input.reward_text) {
       if (isNaN(input.reward_text)) errors.reward_text = "Only Numbers Allowed";
-      if (/[  +]$/.test(input.reward_text)) errors.reward_text = "Only Numbers Allowed!";
+      if (/[  +]$/.test(input.reward_text))
+        errors.reward_text = "Only Numbers Allowed!";
       if (!Number.isInteger(Number(input.age))) errors.age = "Only integers!";
       if (
         parseInt(input.reward_text) < 0 ||
@@ -121,16 +124,9 @@ export default function CreateCharacter() {
     }
   };
 
-  console.log(have());
-
   function handleSubmit(e) {
     e.preventDefault();
-    if (input?.title){
-      setInput({
-        ...input,
-        url: `https://bountyhunter2.vercel.app/characterdetail/${input.title}`,
-      })
-    }
+
     if (have() === false) {
       Swal.fire({
         title: "Form successfully filled",
@@ -180,7 +176,7 @@ export default function CreateCharacter() {
         gender: "",
         subjects: "",
         reward_text: "",
-        url:""
+        urlocal: "",
       });
       setImage("");
     } else if (have() === "e") {
@@ -198,24 +194,6 @@ export default function CreateCharacter() {
         "Acept"
       );
   }
-
-  // function handleDelete(event) {
-  //   setInput({
-  //     ...input,
-  //     imagePool: input.imagePool.filter((e) => e !== event),
-  //   });
-  //   setErrors(
-  //     validate({
-  //       ...input,
-  //       imagePool: input.imagePool.filter((e) => e !== event),
-  //     })
-  //   );
-  // }
-
-  // let key = 0;
-  // function addKey() {
-  //   return key++;
-  // }
 
   console.log(input);
 

@@ -51,6 +51,7 @@ export default function Home() {
               images={criminal.images}
               image={criminal.image}
               url={criminal.url}
+              urlocal={criminal?.urlocal}
               title={criminal.title}
               subjects={criminal.subjects}
             />
