@@ -11,7 +11,7 @@ export default function Pagination({ criminalsPerPage, reward, pagination }) {
 
   function handleInputChange(e) {
     e.preventDefault();
-    pagination(1)
+    pagination(1);
     if (e.target.value.length >= 1 && e.target.value.length >= 1) {
       dispatch(getRewardCriminals(e.target.value));
     }
@@ -28,7 +28,7 @@ export default function Pagination({ criminalsPerPage, reward, pagination }) {
 
   return (
     <Navbar class="w-full rounded-b-lg flex flex-row items-center bg-[#6D4A33] opacity-70 justify-center ">
-      <div className="flex flex-col">
+      <div className="flex ml-10">
         <label htmlFor="input-group-search" className="sr-only">
           Search
         </label>
