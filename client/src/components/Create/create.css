@@ -1,0 +1,17 @@
+#form {
+    display: flex;
+    flex-direction: column;
+  align-items: center;
+ 
+
+    background-image: url("../../assets/images/cartelGame.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 50rem;
+    width: 23rem;
+    /* background-attachment:scroll; */
+    
+  
+    
+    
+  }

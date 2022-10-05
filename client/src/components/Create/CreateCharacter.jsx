@@ -1,50 +1,29 @@
-import React, { useLayoutEffect, useRef } from "react";
+import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-// import { getAllPets, postPet, postImage } from "../redux/Actions/index.js";
+
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { notificationSwal } from "./notificationSwal.jsx";
-// import MapboxAutocomplete from "react-mapbox-autocomplete";
-// import mapboxgl from "mapbox-gl";
-import NavBarHome from "../NavBar/NavBarHome.jsx";
+
 import axios from "axios";
+import "./create.css";
 
 export default function RegisterPet() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     return () => {
-  //       dispatch(getAllPets());
-  //     };
-  //   });
-
-  const id = localStorage.getItem("id");
   const [errors, setErrors] = useState({});
   const [image, setImage] = useState("");
-  const [imagePool, setImagePool] = useState([]);
   const [loadingImage, setLoadingImage] = useState(false);
-  const [loadingImagePool, setLoadingImagePool] = useState(false);
-  const [placeSelect, setPlaceSelect] = useState(false);
-
-  const mapDiv = useRef(null);
 
   const [input, setInput] = useState({
-    id: id,
-    name: "",
+    title: "",
+    classification: "",
     image: "",
-    imagePool: [],
-    type: "",
-    description: "",
-    size: "",
-    age: "",
-    vaccination: "",
-    castrated: false,
     gender: "",
-    place: "",
-    place_longitude: "",
-    place_latitude: "",
+    subjects: "",
+    reward: "",
   });
 
   function handleChange(e) {
@@ -85,124 +64,38 @@ export default function RegisterPet() {
     setLoadingImage(false);
   }
 
-  //   async function handleImage(e) {
-  //     const files = e.target.files;
-  //     const data = new FormData();
-  //     data.append("file", files[0]);
-  //     data.append("upload_preset", "pretty");
-  //     data.append("folder", "Images");
-  //     setLoadingImage(true);
-  //     dispatch(postImage(data)).then((e) => {
-  //       setImage(e.payload);
-  //       setInput({
-  //         ...input,
-  //         image: e.payload,
-  //       });
-  //       setErrors(
-  //         validate({
-  //           ...input,
-  //           image: e.payload,
-  //         })
-  //       );
-  //       setLoadingImage(false);
-  //     });
-  //   }
-
-  //   async function handleImagePool(e) {
-  //     const files = e.target.files;
-  //     const data = new FormData();
-  //     data.append("file", files[0]);
-  //     data.append("upload_preset", "pretty");
-  //     data.append("folder", "Images");
-  //     setLoadingImagePool(true);
-  //     dispatch(postImage(data)).then((e) => {
-  //       setImagePool(e.payload);
-  //       setInput({
-  //         ...input,
-  //         imagePool: [...input.imagePool, e.payload],
-  //       });
-  //       setErrors(
-  //         validate({
-  //           ...input,
-  //           imagePool: [...input.imagePool, e.payload],
-  //         })
-  //       );
-  //       setLoadingImagePool(false);
-  //     });
-  //   }
-
   function validate(input) {
     let errors = {};
 
-    if (!input.id) errors.id = "El id es requerido!";
-
-    if (input.name) {
-      if (!/^[a-zA-Z\s]+$/.test(input.name)) {
-        errors.name = "El nombre sólo puede tener letras!";
-      } else if (input.name.length > 20) {
-        errors.name = "El nombre no puede tener más de 20 caracteres!";
+    if (input.title) {
+      if (!/^[a-zA-Z\s]+$/.test(input.title)) {
+        errors.title = "Only letters allowed!";
+      } else if (input.name.length > 50) {
+        errors.title = "The name cannot be longer than 20 characters!";
       }
-    } else errors.name = "El nombre es requerido!";
+    } else errors.name = "*";
 
-    if (!input.image) errors.image = "La imagen es requerida!";
+    if (!input.image) errors.image = "*";
 
-    if (!input.type) errors.type = "El tipo de mascota es requerido!";
+    if (!input.classification) errors.classification = "*";
 
-    if (!input.size) errors.size = "El tamaño es requerido!";
+    if (!input.gender) errors.gender = "*";
+    if (!input.subjects || input.subjects.length > 200) errors.gender = "*";
 
-    if (input.age) {
-      if (isNaN(input.age)) errors.age = "Sólo se permiten números";
-      if (/[  +]$/.test(input.age)) errors.age = "Sólo se permiten números";
-      if (!Number.isInteger(Number(input.age)))
-        errors.age = "Sólo se permiten números enteros";
-      if (parseInt(input.age) < 0 || parseInt(input.age) > 25)
-        errors.age = "La edad debe ser entre 0 y 25 años";
-    } else errors.age = "La edad es requerida!";
-
-    if (!input.vaccination)
-      errors.vaccination = "La información sobre vacunas es requerida!";
-
-    if (!input.gender)
-      errors.gender = "La información sobre castración es requerida!";
-
-    // if (input.place) {
-    //   if (input.place.length > 50) {
-    //     errors.place = "La ubicación no puede tener más de 50 caracteres!";
-    //   }
-    // } else errors.place = "La ubicación es requerida!";
+    if (input.reward) {
+      if (isNaN(input.reward)) errors.reward = "Only Numbers Allowed";
+      if (/[  +]$/.test(input.reward)) errors.reward = "Only Numbers Allowed!";
+      if (!Number.isInteger(Number(input.age))) errors.age = "Only integers!";
+      if (
+        parseInt(input.reward) < 0 ||
+        parseInt(input.reward) > 10000000 ||
+        parseInt(input.reward) === 0
+      )
+        errors.reward = "Must be between 1 than 10M!";
+    } else errors.reward = "*";
 
     return errors;
   }
-
-  const have = () => {
-    if (
-      errors.id ||
-      errors.name ||
-      errors.image ||
-      errors.type ||
-      errors.size ||
-      errors.age ||
-      errors.vaccination ||
-      errors.gender ||
-      errors.place
-    ) {
-      return true;
-    } else if (
-      input.id &&
-      input.name &&
-      input.image &&
-      input.type &&
-      input.size &&
-      input.age &&
-      input.vaccination &&
-      input.gender &&
-      input.place
-    ) {
-      return false;
-    } else {
-      return "e";
-    }
-  };
 
   //   function handleSubmit(e) {
   //     e.preventDefault();
@@ -281,171 +174,146 @@ export default function RegisterPet() {
   //       );
   //   }
 
-  function handleDelete(event) {
-    setInput({
-      ...input,
-      imagePool: input.imagePool.filter((e) => e !== event),
-    });
-    setErrors(
-      validate({
-        ...input,
-        imagePool: input.imagePool.filter((e) => e !== event),
-      })
-    );
-  }
-
-  let key = 0;
-  function addKey() {
-    return key++;
-  }
-
-  //   function _suggestionSelect(result, lat, long) {
-  //     setInput({
+  // function handleDelete(event) {
+  //   setInput({
+  //     ...input,
+  //     imagePool: input.imagePool.filter((e) => e !== event),
+  //   });
+  //   setErrors(
+  //     validate({
   //       ...input,
-  //       place: result,
-  //       place_longitude: long,
-  //       place_latitude: lat,
-  //     });
-  //     setPlaceSelect(true);
-  //     createNewMap(long, lat);
-  //   }
-  //   const mapAccess = {
-  //     mapboxApiAccessToken:
-  //       "pk.eyJ1Ijoiam9uc2VuIiwiYSI6IkR6UU9oMDQifQ.dymRIgqv-UV6oz0-HCFx1w",
-  //   };
+  //       imagePool: input.imagePool.filter((e) => e !== event),
+  //     })
+  //   );
+  // }
 
-  //   useLayoutEffect(() => {
-  //     //if (placeSelect)
-  //     createNewMap(input.place_longitude, input.place_latitude);
-  //   }, [placeSelect]);
-
-  //   function createNewMap(long, lat) {
-  //     if (placeSelect) {
-  //       new mapboxgl.Map({
-  //         container: mapDiv.current, // container ID
-  //         style: "mapbox://styles/mapbox/streets-v11", // style URL
-  //         center: [long, lat], // starting position [lng, lat]
-  //         zoom: 12, // starting zoom
-  //         projection: "globe", // display the map as a 3D globe
-  //       });
-  //     }
-  //   }
-  //   mapboxgl.accessToken =
-  //     "pk.eyJ1IjoicG9saW5vIiwiYSI6ImNsN2FtdWNybTB0bmk0MHNqZXZxMzM0OTYifQ.O2Y9sZnF-K1k_KhC8MzJbA";
+  // let key = 0;
+  // function addKey() {
+  //   return key++;
+  // }
 
   return (
-    <div>
-      <NavBarHome />
-      <div className="flex flex-col w-full mt-15 m-auto py-8 rounded-lg shadow sm:px-6 md:px-8 lg:px-10">
-        <div className="self-center mb-1 mt-14 text-xl font-normal text-white sm:text-2xl">
+    <div className="flex flex-col lg:flex-col-2 items-center">
+      <div id="form" className="flex flex-col items-center ">
+        <div className="self-center mb-1 mt-20 text-xl font-bold text-white sm:text-2xl">
           New Expedient
         </div>
 
-        <div className="mt-8 px-8 max-w-lg self-center">
+        <div className="w-80 ml-4 max-w-lg self-center">
           <form /* onSubmit={handleSubmit} */>
-            <div>
-              <label className="font-light text-white text-xl">Title:</label>
+            <div className=" bg-black rounded-md border opacity-70 shadow-lg">
+              <label className="font-bold flex text-white text-xl">
+                Title:{" "}
+                {errors.title && (
+                  <p className="font-bold text-sm text-red-700 text-center p-2">
+                    {errors.title}
+                  </p>
+                )}
+              </label>
+
               <input
                 type="text"
-                name="name"
+                name="title"
                 value={input.name}
                 onChange={(e) => handleChange(e)}
                 placeholder="Name or crime..."
                 className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-black placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-yellow-800 focus:border-transparent"
               />
-              {errors.name && (
-                <p className="font-bold text-red-700 text-center p-2">
-                  {errors.name}
-                </p>
-              )}
             </div>
-            <div>
+            <div className=" bg-black rounded-md border opacity-70 shadow-lg">
               <fieldset onChange={(e) => handleChange(e)}>
-                <legend className="font-light text-white text-xl">
+                <legend className="font-bold flex text-white text-xl">
                   Person Classification:
+                  {errors.gender && (
+                    <p className="font-bold text-sm text-red-700 text-center p-2">
+                      {errors.gender}
+                    </p>
+                  )}
                 </legend>
-                <span className="p-3">
+                <span className="p-1">
                   <input
                     type="radio"
                     name="classification"
                     value="main"
-                    className="w-4 h-4 mx-4 text-yellow-600 bg-white ring-1 ring-yellow-900  focus:ring-yellow-900"
+                    className="w-4 h-4 mx-1 text-yellow-600 bg-white ring-1 ring-yellow-900  focus:ring-yellow-900"
                   />
                   <label className="font-light text-white text-xl">Main</label>
                 </span>
-                <span className="p-3">
+                <span className="p-1">
                   <input
                     type="radio"
                     name="classification"
                     value="Victim"
-                    className="w-4 h-4 mx-4 text-yellow-600 bg-white ring-1 ring-yellow-900  focus:ring-yellow-900"
+                    className="w-4 h-4 mx-1 text-yellow-600 bg-white ring-1 ring-yellow-900  focus:ring-yellow-900"
                   />
                   <label className="font-light text-white text-xl">
                     Victim
                   </label>
                 </span>
-                <span className="p-3">
+                <span className="p-1">
                   <input
                     type="radio"
                     name="classification"
                     value="unknown"
-                    className="w-4 h-4 mx-4 text-yellow-600 bg-white ring-1 ring-yellow-900  focus:ring-yellow-900"
+                    className="w-4 h-4 mx-2 text-yellow-600 bg-white ring-1 ring-yellow-900  focus:ring-yellow-900"
                   />
                   <label className="font-light text-white text-xl">
                     Unknown
                   </label>
                 </span>
               </fieldset>
-              {errors.gender && (
-                <p className="font-bold text-red-700 text-center p-2">
-                  {errors.gender}
-                </p>
-              )}
             </div>
-            <div>
+            <div className=" bg-black rounded-md border opacity-70 shadow-lg">
               <fieldset onChange={(e) => handleChange(e)}>
-                <legend className="font-light text-white text-xl">
-                  Gender:
+                <legend className="font-bold flex text-white text-xl">
+                  Gender:{" "}
+                  {errors.gender && (
+                    <p className="font-bold text-sm text-red-700 text-center p-2">
+                      {errors.gender}
+                    </p>
+                  )}
                 </legend>
-                <span className="p-3">
+                <span className="p-1">
                   <input
                     type="radio"
                     name="gender"
                     value="female"
-                    className="w-4 h-4 mx-4 text-yellow-600 bg-white ring-1 ring-yellow-900  focus:ring-yellow-900"
+                    className="w-4 h-4 mx-2 text-yellow-600 bg-white ring-1 ring-yellow-900  focus:ring-yellow-900"
                   />
                   <label className="font-light text-white text-xl">
                     Female
                   </label>
                 </span>
-                <span className="p-3">
+                <span className="p-1">
                   <input
                     type="radio"
                     name="gender"
                     value="male"
-                    className="w-4 h-4 mx-4 text-yellow-600 bg-white ring-1 ring-yellow-900  focus:ring-yellow-900"
+                    className="w-4 h-4 mx-2 text-yellow-600 bg-white ring-1 ring-yellow-900  focus:ring-yellow-900"
                   />
                   <label className="font-light text-white text-xl">Male</label>
                 </span>
-                <span className="p-3">
+                <span className="p-1">
                   <input
                     type="radio"
                     name="gender"
                     value="other"
-                    className="w-4 h-4 mx-4 text-yellow-600 bg-white ring-1 ring-yellow-900  focus:ring-yellow-900"
+                    className="w-4 h-4 mx-2 text-yellow-600 bg-white ring-1 ring-yellow-900  focus:ring-yellow-900"
                   />
                   <label className="font-light text-white text-xl">Other</label>
                 </span>
               </fieldset>
-              {errors.gender && (
-                <p className="font-bold text-red-700 text-center p-2">
-                  {errors.gender}
-                </p>
-              )}
             </div>
 
-            <div>
-              <label className="font-light text-white text-xl">Image:</label>
+            <div className=" bg-black rounded-md border opacity-70 shadow-lg">
+              <label className="font-bold flex text-white text-xl">
+                Image:{" "}
+                {errors.image && (
+                  <p className="font-bold text-sm text-red-700 text-center p-2">
+                    {errors.image}
+                  </p>
+                )}
+              </label>
               <input
                 type="file"
                 name="image"
@@ -454,24 +322,26 @@ export default function RegisterPet() {
                 className="w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
               />
               {loadingImage ? (
-                <h3 className="font-light text-white text-xl self-center">
+                <h3 className="font-bold text-white text-xl self-center">
                   Loading Image...
                 </h3>
               ) : (
                 <img src={image} alt="" className="max-w-xs" />
               )}
-              {errors.image && (
-                <p className="font-bold text-red-700 text-center p-2">
-                  {errors.image}
-                </p>
-              )}
             </div>
 
-            <div>
-              <label className="font-light text-white text-xl">Subjects:</label>
+            <div className=" bg-black rounded-md border opacity-70 shadow-lg">
+              <label className="font-bold text-white text-xl">
+                Subjects:
+                {errors.subjects && (
+                  <p className="font-bold text-sm text-red-700 text-center p-2">
+                    {errors.subjects}
+                  </p>
+                )}
+              </label>
               <textarea
-                name="description"
-                maxLength="255"
+                name="subjects"
+                maxLength="80"
                 value={input.description}
                 placeholder="Type here the crime's title commited..."
                 onChange={(e) => handleChange(e)}
@@ -479,27 +349,29 @@ export default function RegisterPet() {
               />
             </div>
 
-            <div>
-              <label className="font-light text-white text-xl">Reward:</label>
+            <div className=" bg-black rounded-md border opacity-70 shadow-lg">
+              <label className="font-bold flex text-white text-xl">
+                Reward:{" "}
+                {errors.reward && (
+                  <p className="font-bold text-sm text-red-700 text-center p-2">
+                    {errors.reward}
+                  </p>
+                )}
+              </label>
               <input
                 type="text"
-                name="age"
-                value={input.age}
+                name="reward"
+                value={input.reward}
                 onChange={(e) => handleChange(e)}
                 placeholder="$...."
                 className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-yellow-800 focus:border-transparent"
               />
-              {errors.age && (
-                <p className="font-bold text-red-700 text-center p-2">
-                  {errors.age}
-                </p>
-              )}
             </div>
 
             <div>
               <button
                 type="submit"
-                className="py-2 px-4 my-4 w-full bg-yellow-900 hover:bg-yellow-900 focus:ring-yellow-900 focus:ring-offset-yellow-200 text-white w-30 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+                className="py-2 px-4 my-2 w-full bg-yellow-900 hover:bg-yellow-900 focus:ring-yellow-900 focus:ring-offset-yellow-200 text-white w-30 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
               >
                 Crear
               </button>
