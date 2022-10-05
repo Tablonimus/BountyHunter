@@ -12,12 +12,12 @@ export default function CharacterDetail(
   url,
   subjects
 ) {
-  let numbers = id?.reward_text
-    .split("")
-    .filter((char) => (!isNaN(char) ? char : false))
-    .join("")
-    .trim()
-    .split(" ");
+  // let numbers = id?.reward_text
+  //   .split("")
+  //   .filter((char) => (!isNaN(char) ? char : false))
+  //   .join("")
+  //   .trim()
+  //   .split(" ");
  
   return (
     <div className="homeCard">
