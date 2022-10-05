@@ -1,6 +1,7 @@
 import React from "react";
 import "./detail.css";
 import { Tooltip } from "flowbite-react";
+import NavBarHome from "../NavBar/NavBarHome"
 
 export default function CharacterDetail(
   id,
@@ -20,8 +21,11 @@ export default function CharacterDetail(
  
   return (
     <div className="homeCard">
-      
-      <a href={id.url} target="_blank">
+      <NavBarHome/>
+
+      <h1 className="text-5xl">DETAIL FEATURE INCOMING</h1>
+      <h1 className="text-5xl">COMPONENT UNDER CONSTRUCTION</h1>
+      {/* <a href={id.url} target="_blank">
         <div className="flex  flex-col items-center justify-center">
           <Tooltip content="Go to FBI summary" placement="top" trigger="hover">
             <div className="bg--500 mt-20 h-40 w-40">
@@ -53,7 +57,7 @@ export default function CharacterDetail(
             </h5>
           </div>
         </div>
-      </a>
+      </a> */}
     </div>
   );
 }

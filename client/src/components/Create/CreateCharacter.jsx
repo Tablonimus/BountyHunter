@@ -24,6 +24,7 @@ export default function CreateCharacter() {
     gender: "",
     subjects: "",
     reward_text: "",
+    url:""
   });
 
   function handleChange(e) {
@@ -31,12 +32,7 @@ export default function CreateCharacter() {
       ...input,
       [e.target.name]: e.target.value.toString(),
     });
-    if(input?.title){
-      setInput({
-        ...input,
-        url : 
-      })
-    }
+
     setErrors(
       validate({
         ...input,
@@ -129,6 +125,12 @@ export default function CreateCharacter() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (input?.title){
+      setInput({
+        ...input,
+        url: `https://bountyhunter2.vercel.app/characterdetail/${input.title}`,
+      })
+    }
     if (have() === false) {
       Swal.fire({
         title: "Form successfully filled",
@@ -178,6 +180,7 @@ export default function CreateCharacter() {
         gender: "",
         subjects: "",
         reward_text: "",
+        url:""
       });
       setImage("");
     } else if (have() === "e") {
