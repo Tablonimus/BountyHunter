@@ -44,11 +44,11 @@ export function getRewardCriminals() {
           0 /* && crimi?.subjects?.includes("Kidnappings") */
       );
 
-      const getDbCriminals = await axios.get("http://localhost:3001/criminal");
+      const getDbCriminals = await axios.get("https://bounty-hunter-newapp.herokuapp.com/criminal");
       const dbCriminals = getDbCriminals.data;
       const allCriminals = [dbCriminals,payloadReward]
 
-      console.log("NDNDNASKDASKDASODSAJKDSAJK", allCriminals.flat());
+
 
       return dispatch({ type: action.GET_REWARD_FBI, payload: allCriminals.flat() });
     } catch (error) {
@@ -96,7 +96,7 @@ export function getLevel1() {
 export function postCharacter(payload) {
   return async function (dispatch) {
     try {
-      let json = await axios.post("http://localhost:3001/criminal", payload);
+      let json = await axios.post("https://bounty-hunter-newapp.herokuapp.com/criminal", payload);
       dispatch({
         type: action.POST_CRIMINAL,
         payload: json.data,
