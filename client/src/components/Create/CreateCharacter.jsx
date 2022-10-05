@@ -24,7 +24,6 @@ export default function CreateCharacter() {
     gender: "",
     subjects: "",
     reward_text: "",
-    url: `https://happytails.vercel.app/characterdetail/${input.title}`
   });
 
   function handleChange(e) {
@@ -32,6 +31,12 @@ export default function CreateCharacter() {
       ...input,
       [e.target.name]: e.target.value.toString(),
     });
+    if(input?.title){
+      setInput({
+        ...input,
+        url : 
+      })
+    }
     setErrors(
       validate({
         ...input,
