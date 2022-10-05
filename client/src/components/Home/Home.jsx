@@ -6,19 +6,21 @@ import Pagination from "../Pagination/Pagination";
 import "./Home.css";
 
 export default function Home() {
-  const criminalState = useSelector((state) => state.allCriminals);
+  
   const reward = useSelector((state) => state.rewardCriminals);
 
   console.log("reawe", reward);
   //PAGINATION---
   const [currentPage, setCurrentPage] = useState(1);
-  const [criminalsPerPage, setCriminalsPerPage] = useState(20);
+  const [criminalsPerPage, setCriminalsPerPage] = useState(24);
   const indexOfLastCriminal = currentPage * criminalsPerPage;
   const indexOfFirstCriminal = indexOfLastCriminal - criminalsPerPage;
   const currentCriminals = reward?.slice(
     indexOfFirstCriminal,
     indexOfLastCriminal
   );
+
+
 
   const pagination = (pageNumber) => {
     setCurrentPage(pageNumber);

@@ -7,12 +7,15 @@ export default function NavBarGame() {
   return (
     <Navbar
       fluid={true}
-      class="bg-[#6D4A33] rounded-md shadow-lg flex justify-between"
+      class="bg-[#6D4A33] rounded-md shadow-lg flex lg:flex-col justify-between"
     >
-      <img src={bounty} className="m-2 w-24" alt="Flowbite Logo" />
       <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white"></span>
 
-      <div className="flex m-2 md:order-2">
+      <div className="flex flex-col items-center m-2 md:order-2">
+      <img src={bounty} className="m-2 w-24" alt="Flowbite Logo" />
+        <Link to="/game">
+          <Button color={"warning"}>Select Level</Button>
+        </Link>
         <Link to="/">
           <Button color={"warning"}>Back to Menu</Button>
         </Link>

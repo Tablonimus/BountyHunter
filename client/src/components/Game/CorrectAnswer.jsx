@@ -29,7 +29,7 @@ export default function CorrectAnswer(
               <>Loading...</>
             )
           }
-          alt="Image deleted for your security by FBI"
+          alt="Image Protected"
           className="w-40 h-40 rounded-md shadow-lg object-cover"
         />
       </div>

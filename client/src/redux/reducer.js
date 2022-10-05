@@ -3,9 +3,8 @@ import * as action from "../redux/actions/actionTypes";
 const initialState = {
   allCriminals: [],
   rewardCriminals: [],
-  correctAnswer: {},
-  incorrectAnswer1: {},
-  IncorrectAnswer2: {},
+  level1: [],
+
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -23,10 +22,10 @@ export default function rootReducer(state = initialState, { type, payload }) {
       };
     }
 
-    case action.GET_CORRECT_ANSWER: {
+    case action.LOAD_LEVEL1: {
       return {
         ...state,
-        correctAnswer: payload,
+        level1: payload,
       };
     }
     case action.GET_INCORRECT1_ANSWER: {

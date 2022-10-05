@@ -66,89 +66,14 @@ export default function Clues(
         ) : (
           <></>
         )} */}
-        {id?.eyes_raw?.length > 0 ? (
-          <h5 className="font-bold bg-black m-1 rounded-md opacity-70">
-            👀 Eyes Raw: {id.eyes_raw}
-          </h5>
-        ) : (
-          <></>
-        )}
         {/* {id?.hair?.length > 0 ? (
           <h5 className="font-bold bg-black m-1 rounded-md opacity-70">Hair Color: {id.hair}</h5>
         ) : (
           <></>
         )} */}
-        {id?.hair_raw?.length > 0 ? (
-          <h5 className="font-bold bg-black m-1 rounded-md opacity-70">
-            ✂ Hair Raw: {id.hair_raw}
-          </h5>
-        ) : (
-          <></>
-        )}
-        {id?.height_max?.length > 0 ? (
-          <h5 className="font-bold bg-black m-1 rounded-md opacity-70">
-            📏 Height Max: {id.height_max}
-          </h5>
-        ) : (
-          <></>
-        )}
-        {id?.height_min?.length > 0 ? (
-          <h5 className="font-bold bg-black m-1 rounded-md opacity-70">
-            📏 Height Min: {id.height_min}
-          </h5>
-        ) : (
-          <></>
-        )}
         {id?.languages?.length > 0 ? (
           <h5 className="font-bold bg-black m-1 rounded-md opacity-70">
             Languages: {id.languages}
-          </h5>
-        ) : (
-          <></>
-        )}
-        {id?.race_raw?.length > 0 ? (
-          <h5 className="font-bold bg-black m-1 rounded-md opacity-70">
-            🕵🏾‍♂️ Race Raw: {id.race_raw}
-          </h5>
-        ) : (
-          <></>
-        )}
-        {/* {id?.race?.length > 0 ? (
-          <h5 className="font-bold bg-black m-1 rounded-md opacity-70">Race: {id.race}</h5>
-        ) : (
-          <></>
-        )} */}
-        {id?.sex?.length > 0 ? (
-          <h5 className="font-bold bg-black m-1 rounded-md opacity-70">
-            🚻 Sex: {id.sex}
-          </h5>
-        ) : (
-          <></>
-        )}
-        {id?.weight?.length > 0 ? (
-          <h5 className="font-bold bg-black m-1 rounded-md opacity-70">
-            🧍‍♂️ Weight: {id.weight}
-          </h5>
-        ) : (
-          <></>
-        )}
-        {id?.weight_max?.length > 0 ? (
-          <h5 className="font-bold bg-black m-1 rounded-md opacity-70">
-            🧍‍♂️ Weight Max: {id.weight_max}
-          </h5>
-        ) : (
-          <></>
-        )}
-        {id?.weight_min?.length > 0 ? (
-          <h5 className="font-bold bg-black m-1 rounded-md opacity-70">
-            🧍‍♂️ Weight Min: {id.weight_min}
-          </h5>
-        ) : (
-          <></>
-        )}
-        {id?.scars_and_marks?.length > 0 ? (
-          <h5 className="font-bold bg-black m-1 rounded-md opacity-70">
-            📸 Scars & Marks: {id.scars_and_marks}
           </h5>
         ) : (
           <></>
@@ -188,7 +113,13 @@ export default function Clues(
         ) : (
           <></>
         )}
-        {id?.suspects?.length > 0 ?   <h5 className="font-bold bg-black m-1 rounded-md opacity-70">🤝 Suspects: {id.suspects}</h5> : <></>}{" "}
+        {id?.suspects?.length > 0 ? (
+          <h5 className="font-bold bg-black m-1 rounded-md opacity-70">
+            🤝 Suspects: {id.suspects}
+          </h5>
+        ) : (
+          <></>
+        )}{" "}
       </div>
     </div>
   );

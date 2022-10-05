@@ -31,6 +31,23 @@ body {
   width: 55rem;
   /* background-attachment:scroll; */
   
+
   
   
 }
+
+.levels {
+  display: flex;
+  flex-direction: column;
+
+  background-image: url("../../assets/images/cartelGame.png");
+  background-repeat: no-repeat;
+  height: 27rem;
+  width: 55rem;
+  /* background-attachment:scroll; */
+  
+  
+  
+  
+}
+

@@ -40,11 +40,13 @@ export default function RewardCard(
             <h5 className="text-[25px] text-red-500 font-bold">
               {" "}
               {`${
-                numbers[0] === "" || !numbers.length
-                  ? "1000"
-                  : numbers.length <= 4
-                  ? `$${numbers}`
-                  : `$${numbers.join("").slice(0, -4)}`
+                numbers[0] === "" || !numbers[0].length
+                  ? "$ 1000"
+                  : numbers[0] === "1"
+                  ? `$${numbers[0]} Millon`
+                  : numbers[0].length >= 1 && numbers[0].length < 3
+                  ? `$${numbers[0]} Millons`
+                  : `$${numbers[0]}`
               }`}
             </h5>
           </div>
