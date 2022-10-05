@@ -20,7 +20,7 @@ export default function CharacterDetail(
   //   .split(" ");
  
   return (
-    <div className="homeCard">
+    <div className="w-full h-full">
       <NavBarHome/>
 
       <h1 className="text-5xl">DETAIL FEATURE INCOMING</h1>
