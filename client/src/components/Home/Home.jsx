@@ -5,15 +5,16 @@ import RewardCard from "../Cards/RewardCard";
 import NavBarHome from "../NavBar/NavBarHome";
 import Pagination from "../Pagination/Pagination";
 import { getRewardCriminals } from "../../redux/actions";
-import FooterComponentOwn from "../FooterComponent/FooterComponentOwn"
+import FooterComponentOwn from "../FooterComponent/FooterComponentOwn";
 import "./Home.css";
 
 export default function Home() {
   const dispatch = useDispatch();
-  useEffect(() => { 
+  useEffect(() => {
     dispatch(getRewardCriminals());
-    setCurrentPage(1)
+    setCurrentPage(1);
   }, [dispatch]);
+
   const reward = useSelector((state) => state.rewardCriminals);
   //PAGINATION---
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,15 +24,11 @@ export default function Home() {
   const currentCriminals = reward?.slice(
     indexOfFirstCriminal,
     indexOfLastCriminal
-    );
+  );
 
-    const pagination = (pageNumber) => {
-      setCurrentPage(pageNumber);
-    };
-  
-  
-    
- 
+  const pagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div id="Home" className="">
@@ -59,7 +56,9 @@ export default function Home() {
         ) : (
           <div className="w-screen h-screen flex flex-col items-center justify-center">
             <div className="h-56 flex flex-col items-center justify-around shadow-lg bg-black opacity-70 rounded-md border">
-              <h1 className="text-2xl text-white font-bold">Loading FBI files</h1>
+              <h1 className="text-2xl text-white font-bold">
+                Loading FBI files
+              </h1>
               <Spinner
                 color="warning"
                 aria-label="Extra large spinner example"
@@ -69,7 +68,7 @@ export default function Home() {
           </div>
         )}
       </div>
-      <FooterComponentOwn/>
+      <FooterComponentOwn />
     </div>
   );
 }
