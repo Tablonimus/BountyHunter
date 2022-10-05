@@ -16,22 +16,21 @@ export default function Menu() {
   return (
     <div className="flex flex-col items-center justify-center m-5">
       <div className="menu">
-        <Link to="/home" className="m-1">
-          <button className="bg-black rounded-md w-44 h-16 mb-6 opacity-70 hover:opacity-80 shadow-lg">
-            <h5 className="text-white text-2xl hover:text-yellow-300 font-bold">
-              Most Wanteds
-            </h5>
-          </button>
-        </Link>
-
         <button
           onClick={onClick}
-          className="bg-black rounded-md w-44 h-16 opacity-70 hover:opacity-80 shadow-lg"
+          className="bg-black rounded-md w-44 h-16  mb-6 opacity-70 hover:opacity-80 shadow-lg"
         >
           <h5 className="text-white text-2xl hover:text-yellow-300 font-bold">
             Play Game
           </h5>
         </button>
+        <Link to="/home" className="m-1">
+          <button className="bg-black rounded-md w-44 h-16 opacity-70 hover:opacity-80 shadow-lg">
+            <h5 className="text-white text-2xl hover:text-yellow-300 font-bold">
+              Most Wanteds
+            </h5>
+          </button>
+        </Link>
 
         <Modal show={show} onClose={onClose}>
           <Modal.Header>Rules</Modal.Header>
@@ -46,9 +45,9 @@ export default function Menu() {
                 you clues of the suspect you are looking for
               </p>
               <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-              <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                Español:
-              </p>
+                <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                  Español:
+                </p>
                 ¡Cuidado! Estas a punto de conocer los expedientes clasificados
                 del FBI, puede existir información e imagenes que hieran su
                 sensibilidad. Si sigue avanzando BountyHunters NO acepta
