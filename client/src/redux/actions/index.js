@@ -128,3 +128,7 @@ export function postCharacter(payload) {
     }
   };
 }
+//------------GET DETAIL---------
+export function getDetail(payload){
+  
+}

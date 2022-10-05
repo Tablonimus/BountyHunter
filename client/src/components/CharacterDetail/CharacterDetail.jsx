@@ -1,8 +1,8 @@
 import React from "react";
-import "./reward.css";
+import "./detail.css";
 import { Tooltip } from "flowbite-react";
 
-export default function RewardCard(
+export default function CharacterDetail(
   id,
   title,
   reward_text,

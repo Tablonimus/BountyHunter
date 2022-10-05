@@ -6,7 +6,7 @@ import { getRewardCriminals } from "../../redux/actions";
 export default function SearchBar() {
   const dispatch = useDispatch();
   const criminals = useSelector((state) => state.rewardCriminals);
-
+ console.log(criminals)
   function handleInputChange(e) {
     e.preventDefault();
 

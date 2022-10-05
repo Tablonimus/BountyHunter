@@ -1,11 +1,9 @@
 import logo from "./logo.svg";
 import "./App.css";
 import {
-  getAllCriminals,
+
   getRewardCriminals,
-  getCorrectAnswer,
-  getIncorrectAnswer1,
-  getIncorrectAnswer2,
+  
   getLevel1,
 } from "./redux/actions/index";
 import { useDispatch } from "react-redux";
@@ -20,6 +18,7 @@ import Menu from "./components/Menu/Menu";
 import CreateCharacter from "./components/Create/CreateCharacter";
 import Level3 from "./components/Game/Level3";
 import Level2 from "./components/Game/Level2";
+import CharacterDetail from "./components/CharacterDetail/CharacterDetail";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +38,7 @@ function App() {
         <Route path={"/game/level2"} element={<Level2 />} />
         <Route path={"/game/level3"} element={<Level3 />} />
         <Route path={"/newcharacter"} element={<CreateCharacter />} />
+        <Route path={"/characterdetail/:name"} element={<CharacterDetail />} />
       </Routes>
     </BrowserRouter>
   );

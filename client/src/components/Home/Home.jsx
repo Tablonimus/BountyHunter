@@ -12,10 +12,9 @@ export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => { 
     dispatch(getRewardCriminals());
-    
+    setCurrentPage(1)
   }, [dispatch]);
   const reward = useSelector((state) => state.rewardCriminals);
-
   //PAGINATION---
   const [currentPage, setCurrentPage] = useState(1);
   const [criminalsPerPage, setCriminalsPerPage] = useState(24);
@@ -24,11 +23,16 @@ export default function Home() {
   const currentCriminals = reward?.slice(
     indexOfFirstCriminal,
     indexOfLastCriminal
-  );
+    );
 
-  const pagination = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+    const pagination = (pageNumber) => {
+      setCurrentPage(pageNumber);
+    };
+  
+  
+    
+ 
+
   return (
     <div id="Home" className="">
       <NavBarHome />
@@ -37,7 +41,7 @@ export default function Home() {
         reward={reward?.length}
         pagination={pagination}
       />
-      <div className="flex flex-col h-full  items-center justify-center md:grid md:grid-cols-4 :justify-around">
+      <div className="flex flex-col w-full h-full  items-center justify-center md:grid md:grid-cols-4 :justify-around">
         {currentCriminals?.length > 0 ? (
           currentCriminals?.map((criminal) => (
             <RewardCard
