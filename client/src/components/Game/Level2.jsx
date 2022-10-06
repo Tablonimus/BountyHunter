@@ -1,24 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CorrectAnswer from "./CorrectAnswer";
-import NavBarHome from "../NavBar/NavBarHome";
-import wantedGame from "../../assets/images/wantedGame.png";
+
 import correctt from "../../assets/images/correct.png";
 import incorrect from "../../assets/images/incorrect.png";
-import { useEffect } from "react";
-import {
-  getAllCriminals,
-  getCorrectAnswer,
-  getIncorrectAnswer1,
-  getIncorrectAnswer2,
-} from "../../redux/actions";
+
 import CluesLevel2 from "./CluesLevel2";
 import { useState } from "react";
 import IncorrectAnswer2 from "./IncorrectAnswer2";
 import IncorrectAnswer1 from "./IncorrectAnswer1";
 import IncorrectAnswer3 from "./IncorrectAnswer3";
 import NavBarGame from "../NavBar/NavBarGame";
-import { Modal, Button } from "flowbite-react";
+import { Modal, Button,Spinner } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 
 export default function Level1() {
@@ -76,9 +69,9 @@ export default function Level1() {
 
   //-------------------------------------------------------------------------------
   return (
-    <div className="w-full flex flex-col lg:flex-row lg:items-center justify-between">
-      <div className="flex flex-col items-center lg:items-start lg:flex lg:flex-row justify-around mb-5 ">
-        <div className="w-96 h-[40rem] ml-8">
+    <div className="w-full flex flex-col lg:flex-row lg:items-center justify-around">
+   <div className="flex flex-col items-center lg:items-start lg:flex lg:flex-row justify-around mb-5 ">
+        <div className="w-96 h-[40rem]">
           <CluesLevel2
             id={correctClue?.uid}
             reward_text={correctClue?.reward_text}
@@ -110,241 +103,265 @@ export default function Level1() {
             weight_min={correctClue?.weight_min}
           />
         </div>
-        <div className="flex flex-col lg:grid lg:grid-cols-2 items-center lg:m-6 h-3/4 w-1/2">
-          {/* POSIBILIDAD 0 */}
-          {sortAnswer === 0 ? (
-            <>
-              <button onClick={(e) => next(e)}>
-                <CorrectAnswer
-                  id={correctClue?.uid}
-                  reward_text={correctClue?.reward_text}
-                  images={correctClue?.images}
-                  url={correctClue?.url}
-                  title={correctClue?.title}
-                  subjects={correctClue?.subjects}
-                />
-              </button>
-              <button onClick={(e) => wrong(e)}>
-                <IncorrectAnswer1
-                  id={incorrectClue1?.uid}
-                  reward_text={incorrectClue1?.reward_text}
-                  images={incorrectClue1?.images}
-                  url={incorrectClue1?.url}
-                  title={incorrectClue1?.title}
-                  subjects={incorrectClue1?.subjects}
-                />
-              </button>
-              <button onClick={(e) => wrong(e)}>
-                <IncorrectAnswer2
-                  id={incorrectClue2?.uid}
-                  reward_text={incorrectClue2?.reward_text}
-                  images={incorrectClue2?.images}
-                  url={incorrectClue2?.url}
-                  title={incorrectClue2?.title}
-                  subjects={incorrectClue2?.subjects}
-                />
-              </button>
-              <button onClick={(e) => wrong(e)}>
-                <IncorrectAnswer3
-                  id={incorrectClue3?.uid}
-                  reward_text={incorrectClue3?.reward_text}
-                  images={incorrectClue3?.images}
-                  url={incorrectClue3?.url}
-                  title={incorrectClue3?.title}
-                  subjects={incorrectClue3?.subjects}
-                />
-              </button>
-            </>
-          ) : (
-            false
-          )}
-          {/* POSIBILIDAD 1 */}
-          {sortAnswer === 1 ? (
-            <>
-              <button onClick={(e) => wrong(e)}>
-                <IncorrectAnswer1
-                  id={incorrectClue1?.uid}
-                  reward_text={incorrectClue1?.reward_text}
-                  images={incorrectClue1?.images}
-                  url={incorrectClue1?.url}
-                  title={incorrectClue1?.title}
-                  subjects={incorrectClue1?.subjects}
-                />
-              </button>
-              <button onClick={(e) => next(e)}>
-                <CorrectAnswer
-                  id={correctClue?.uid}
-                  reward_text={correctClue?.reward_text}
-                  images={correctClue?.images}
-                  url={correctClue?.url}
-                  title={correctClue?.title}
-                  subjects={correctClue?.subjects}
-                />
-              </button>
-              <button onClick={(e) => wrong(e)}>
-                <IncorrectAnswer2
-                  id={incorrectClue2?.uid}
-                  reward_text={incorrectClue2?.reward_text}
-                  images={incorrectClue2?.images}
-                  url={incorrectClue2?.url}
-                  title={incorrectClue2?.title}
-                  subjects={incorrectClue2?.subjects}
-                />
-              </button>
-              <button onClick={(e) => wrong(e)}>
-                <IncorrectAnswer3
-                  id={incorrectClue3?.uid}
-                  reward_text={incorrectClue3?.reward_text}
-                  images={incorrectClue3?.images}
-                  url={incorrectClue3?.url}
-                  title={incorrectClue3?.title}
-                  subjects={incorrectClue3?.subjects}
-                />
-              </button>
-            </>
-          ) : (
-            false
-          )}
-          {/* POSIBILIDAD 2 */}
-          {sortAnswer === 2 ? (
-            <>
-              <button onClick={(e) => wrong(e)}>
-                <IncorrectAnswer1
-                  id={incorrectClue1?.uid}
-                  reward_text={incorrectClue1?.reward_text}
-                  images={incorrectClue1?.images}
-                  url={incorrectClue1?.url}
-                  title={incorrectClue1?.title}
-                  subjects={incorrectClue1?.subjects}
-                />
-              </button>
-              <button onClick={(e) => wrong(e)}>
-                <IncorrectAnswer2
-                  id={incorrectClue2?.uid}
-                  reward_text={incorrectClue2?.reward_text}
-                  images={incorrectClue2?.images}
-                  url={incorrectClue2?.url}
-                  title={incorrectClue2?.title}
-                  subjects={incorrectClue2?.subjects}
-                />
-              </button>
-              <button onClick={(e) => next(e)}>
-                <CorrectAnswer
-                  id={correctClue?.uid}
-                  reward_text={correctClue?.reward_text}
-                  images={correctClue?.images}
-                  url={correctClue?.url}
-                  title={correctClue?.title}
-                  subjects={correctClue?.subjects}
-                />
-              </button>
-              <button onClick={(e) => wrong(e)}>
-                <IncorrectAnswer3
-                  id={incorrectClue3?.uid}
-                  reward_text={incorrectClue3?.reward_text}
-                  images={incorrectClue3?.images}
-                  url={incorrectClue3?.url}
-                  title={incorrectClue3?.title}
-                  subjects={incorrectClue3?.subjects}
-                />
-              </button>
-            </>
-          ) : (
-            false
-          )}
-          {/* POSIBILIDAD 3 */}
-          {sortAnswer === 3 ? (
-            <>
-              <button onClick={(e) => wrong(e)}>
-                <IncorrectAnswer1
-                  id={incorrectClue1?.uid}
-                  reward_text={incorrectClue1?.reward_text}
-                  images={incorrectClue1?.images}
-                  url={incorrectClue1?.url}
-                  title={incorrectClue1?.title}
-                  subjects={incorrectClue1?.subjects}
-                />
-              </button>
+        <div className="w-11/12">
+          {correctClue ? (
+            <div className="flex flex-col lg:grid lg:grid-cols-2 items-center lg:m-14">
+              {/* POSIBILIDAD 0 */}
+              {sortAnswer === 0 ? (
+                <>
+                  <button onClick={(e) => next(e)}>
+                    <CorrectAnswer
+                      id={correctClue?.uid}
+                      reward_text={correctClue?.reward_text}
+                      images={correctClue?.images}
+                      url={correctClue?.url}
+                      title={correctClue?.title}
+                      subjects={correctClue?.subjects}
+                    />
+                  </button>
+                  <button onClick={(e) => wrong(e)}>
+                    <IncorrectAnswer1
+                      id={incorrectClue1?.uid}
+                      reward_text={incorrectClue1?.reward_text}
+                      images={incorrectClue1?.images}
+                      url={incorrectClue1?.url}
+                      title={incorrectClue1?.title}
+                      subjects={incorrectClue1?.subjects}
+                    />
+                  </button>
+                  <button onClick={(e) => wrong(e)}>
+                    <IncorrectAnswer2
+                      id={incorrectClue2?.uid}
+                      reward_text={incorrectClue2?.reward_text}
+                      images={incorrectClue2?.images}
+                      url={incorrectClue2?.url}
+                      title={incorrectClue2?.title}
+                      subjects={incorrectClue2?.subjects}
+                    />
+                  </button>
+                  <button onClick={(e) => wrong(e)}>
+                    <IncorrectAnswer3
+                      id={incorrectClue3?.uid}
+                      reward_text={incorrectClue3?.reward_text}
+                      images={incorrectClue3?.images}
+                      url={incorrectClue3?.url}
+                      title={incorrectClue3?.title}
+                      subjects={incorrectClue3?.subjects}
+                    />
+                  </button>
+                </>
+              ) : (
+                false
+              )}
+              {/* POSIBILIDAD 1 */}
+              {sortAnswer === 1 ? (
+                <>
+                  <button onClick={(e) => wrong(e)}>
+                    <IncorrectAnswer1
+                      id={incorrectClue1?.uid}
+                      reward_text={incorrectClue1?.reward_text}
+                      images={incorrectClue1?.images}
+                      url={incorrectClue1?.url}
+                      title={incorrectClue1?.title}
+                      subjects={incorrectClue1?.subjects}
+                    />
+                  </button>
+                  <button onClick={(e) => next(e)}>
+                    <CorrectAnswer
+                      id={correctClue?.uid}
+                      reward_text={correctClue?.reward_text}
+                      images={correctClue?.images}
+                      url={correctClue?.url}
+                      title={correctClue?.title}
+                      subjects={correctClue?.subjects}
+                    />
+                  </button>
+                  <button onClick={(e) => wrong(e)}>
+                    <IncorrectAnswer2
+                      id={incorrectClue2?.uid}
+                      reward_text={incorrectClue2?.reward_text}
+                      images={incorrectClue2?.images}
+                      url={incorrectClue2?.url}
+                      title={incorrectClue2?.title}
+                      subjects={incorrectClue2?.subjects}
+                    />
+                  </button>
+                  <button onClick={(e) => wrong(e)}>
+                    <IncorrectAnswer3
+                      id={incorrectClue3?.uid}
+                      reward_text={incorrectClue3?.reward_text}
+                      images={incorrectClue3?.images}
+                      url={incorrectClue3?.url}
+                      title={incorrectClue3?.title}
+                      subjects={incorrectClue3?.subjects}
+                    />
+                  </button>
+                </>
+              ) : (
+                false
+              )}
+              {/* POSIBILIDAD 2 */}
+              {sortAnswer === 2 ? (
+                <>
+                  <button onClick={(e) => wrong(e)}>
+                    <IncorrectAnswer1
+                      id={incorrectClue1?.uid}
+                      reward_text={incorrectClue1?.reward_text}
+                      images={incorrectClue1?.images}
+                      url={incorrectClue1?.url}
+                      title={incorrectClue1?.title}
+                      subjects={incorrectClue1?.subjects}
+                    />
+                  </button>
+                  <button onClick={(e) => wrong(e)}>
+                    <IncorrectAnswer2
+                      id={incorrectClue2?.uid}
+                      reward_text={incorrectClue2?.reward_text}
+                      images={incorrectClue2?.images}
+                      url={incorrectClue2?.url}
+                      title={incorrectClue2?.title}
+                      subjects={incorrectClue2?.subjects}
+                    />
+                  </button>
+                  <button onClick={(e) => next(e)}>
+                    <CorrectAnswer
+                      id={correctClue?.uid}
+                      reward_text={correctClue?.reward_text}
+                      images={correctClue?.images}
+                      url={correctClue?.url}
+                      title={correctClue?.title}
+                      subjects={correctClue?.subjects}
+                    />
+                  </button>
+                  <button onClick={(e) => wrong(e)}>
+                    <IncorrectAnswer3
+                      id={incorrectClue3?.uid}
+                      reward_text={incorrectClue3?.reward_text}
+                      images={incorrectClue3?.images}
+                      url={incorrectClue3?.url}
+                      title={incorrectClue3?.title}
+                      subjects={incorrectClue3?.subjects}
+                    />
+                  </button>
+                </>
+              ) : (
+                false
+              )}
+              {/* POSIBILIDAD 3 */}
+              {sortAnswer === 3 ? (
+                <>
+                  <button onClick={(e) => wrong(e)}>
+                    <IncorrectAnswer1
+                      id={incorrectClue1?.uid}
+                      reward_text={incorrectClue1?.reward_text}
+                      images={incorrectClue1?.images}
+                      url={incorrectClue1?.url}
+                      title={incorrectClue1?.title}
+                      subjects={incorrectClue1?.subjects}
+                    />
+                  </button>
 
-              <button onClick={(e) => wrong(e)}>
-                <IncorrectAnswer2
-                  id={incorrectClue2?.uid}
-                  reward_text={incorrectClue2?.reward_text}
-                  images={incorrectClue2?.images}
-                  url={incorrectClue2?.url}
-                  title={incorrectClue2?.title}
-                  subjects={incorrectClue2?.subjects}
-                />
-              </button>
-              <button onClick={(e) => wrong(e)}>
-                <IncorrectAnswer3
-                  id={incorrectClue3?.uid}
-                  reward_text={incorrectClue3?.reward_text}
-                  images={incorrectClue3?.images}
-                  url={incorrectClue3?.url}
-                  title={incorrectClue3?.title}
-                  subjects={incorrectClue3?.subjects}
-                />
-              </button>
-              <button onClick={(e) => next(e)}>
-                <CorrectAnswer
-                  id={correctClue?.uid}
-                  reward_text={correctClue?.reward_text}
-                  images={correctClue?.images}
-                  url={correctClue?.url}
-                  title={correctClue?.title}
-                  subjects={correctClue?.subjects}
-                />
-              </button>
-            </>
-          ) : (
-            false
-          )}
-          {/* CORRECT ANSWER MESSAGE */}
+                  <button onClick={(e) => wrong(e)}>
+                    <IncorrectAnswer2
+                      id={incorrectClue2?.uid}
+                      reward_text={incorrectClue2?.reward_text}
+                      images={incorrectClue2?.images}
+                      url={incorrectClue2?.url}
+                      title={incorrectClue2?.title}
+                      subjects={incorrectClue2?.subjects}
+                    />
+                  </button>
+                  <button onClick={(e) => wrong(e)}>
+                    <IncorrectAnswer3
+                      id={incorrectClue3?.uid}
+                      reward_text={incorrectClue3?.reward_text}
+                      images={incorrectClue3?.images}
+                      url={incorrectClue3?.url}
+                      title={incorrectClue3?.title}
+                      subjects={incorrectClue3?.subjects}
+                    />
+                  </button>
+                  <button onClick={(e) => next(e)}>
+                    <CorrectAnswer
+                      id={correctClue?.uid}
+                      reward_text={correctClue?.reward_text}
+                      images={correctClue?.images}
+                      url={correctClue?.url}
+                      title={correctClue?.title}
+                      subjects={correctClue?.subjects}
+                    />
+                  </button>
+                </>
+              ) : (
+                false
+              )}
 
-          <Modal show={correct} size="md" popup={true} onClose={onClose}>
-            <Modal.Header />
-            <Modal.Body>
-              <div className="text-center bg-green-500 rounded-lg p-5">
-                <img src={correctt} alt="" className="w-10" />
-                <h3 className="mb-5 text-lg font-bold text-white dark:text-gray-400">
-                  Hunting Successful! Play Again?
-                </h3>
-                <div className="flex justify-center gap-4">
-                  <Button color="success" onClick={playAgainClick}>
-                    Yes, Continue...
-                  </Button>
-                  <Button color="gray" onClick={onClick}>
-                    No
-                  </Button>
-                </div>
+              {/* CORRECT ANSWER MESSAGE */}
+
+              <Modal show={correct} size="md" popup={true} onClose={onClose}>
+                <Modal.Header />
+                <Modal.Body>
+                  <div className="text-center bg-green-500 rounded-lg p-5">
+                    <img src={correctt} alt="" className="w-10" />
+                    <h3 className="mb-5 text-lg font-bold text-white dark:text-gray-400">
+                      Hunting Successful! Play Again?
+                    </h3>
+                    <div className="flex justify-center gap-4">
+                      <Button color="success" onClick={playAgainClick}>
+                        Yes, Continue...
+                      </Button>
+                      <Button color="gray" onClick={onClick}>
+                        No
+                      </Button>
+                    </div>
+                  </div>
+                </Modal.Body>
+              </Modal>
+
+              {/* WRONG ANSWER MESSAGE */}
+
+              <Modal
+                show={wrongAnswer}
+                size="md"
+                popup={true}
+                onClose={onClose}
+              >
+                <Modal.Header />
+                <Modal.Body>
+                  <div className="text-center bg-red-500 rounded-lg p-5 ">
+                    <img src={incorrect} alt="" className="w-10" />
+                    <h3 className="mb-5 text-lg font-bold text-white dark:text-gray-400">
+                      Wrong Answer! Play Again?
+                    </h3>
+                    <div className="flex justify-center gap-4">
+                      <Button color="success" onClick={playAgainClick}>
+                        Yes, I'm prepared
+                      </Button>
+                      <Button color="gray" onClick={onClick}>
+                        No
+                      </Button>
+                    </div>
+                  </div>
+                </Modal.Body>
+              </Modal>
+            </div>
+          ) : (
+            <div className="w-screen h-screen flex flex-col items-center justify-center">
+              <div className="h-56 flex flex-col items-center justify-around shadow-lg bg-black opacity-70 rounded-md border">
+                <h1 className="text-2xl text-white font-bold">
+                  Loading FBI files
+                </h1>
+                <Spinner
+                  color="warning"
+                  aria-label="Extra large spinner example"
+                  size="xl"
+                />
               </div>
-            </Modal.Body>
-          </Modal>
-
-          {/* WRONG ANSWER MESSAGE */}
-
-          <Modal show={wrongAnswer} size="md" popup={true} onClose={onClose}>
-            <Modal.Header />
-            <Modal.Body>
-              <div className="text-center bg-red-500 rounded-lg p-5 ">
-                <img src={incorrect} alt="" className="w-10" />
-                <h3 className="mb-5 text-lg font-bold text-white dark:text-gray-400">
-                  Wrong Answer! Play Again?
-                </h3>
-                <div className="flex justify-center gap-4">
-                  <Button color="success" onClick={playAgainClick}>
-                    Yes, I'm prepared
-                  </Button>
-                  <Button color="gray" onClick={onClick}>
-                    No
-                  </Button>
-                </div>
-              </div>
-            </Modal.Body>
-          </Modal>
+            </div>
+          )}
         </div>
       </div>
+
       <NavBarGame />
     </div>
   );

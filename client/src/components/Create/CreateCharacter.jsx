@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { notificationSwal } from "./notificationSwal.jsx";

@@ -2,7 +2,7 @@ body {
   background-image: url("../../assets/images/backgroundGame.png");
   background-repeat: no-repeat;
   background-position: cover;
-  background-attachment:fixed;
+  background-attachment: fixed;
   background-size: cover;
 }
 
@@ -18,22 +18,34 @@ body {
   background-size: cover;
   height: 18em;
   width: 14em;
-  margin:2px;
+  margin: 2px;
   border-radius: 5px;
+}
+
+.wantClueLevel1 {
+  display: flex;
+  flex-direction: column;
+
+  background-image: url("../../assets/images/cartelGameLevel1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+ height: max-content;
+ width: max-content;
+  /* background-attachment:scroll; */
+
 }
 .wantClue {
   display: flex;
   flex-direction: column;
 
-  background-image: url("../../assets/images/cartelGame.png");
+  background-image: url("../../assets/images/cartelGameLevel1.png");
   background-repeat: no-repeat;
-  height: 55rem;
-  width: 55rem;
-  /* background-attachment:scroll; */
-  
+  background-size: cover;
 
-  
-  
+ height: max-content;
+ width: max-content;
+  /* background-attachment:scroll; */
 }
 
 .levels {
@@ -45,9 +57,4 @@ body {
   height: 27rem;
   width: 55rem;
   /* background-attachment:scroll; */
-  
-  
-  
-  
 }
-

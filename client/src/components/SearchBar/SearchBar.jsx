@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRewardCriminals } from "../../redux/actions";
 
@@ -10,13 +9,12 @@ export default function SearchBar() {
   function handleInputChange(e) {
     e.preventDefault();
 
-    if (e.target.value.length >= 1 && e.target.value.length >= 1) {
+    if (e.target.value.length >= 1 && e.target.value.length >=1) {
       dispatch(getRewardCriminals(e.target.value));
     }
     if (e.target.value.length === 0) {
       dispatch(getRewardCriminals(e.target.value));
     }
-   
   }
   return (
     <div className="flex flex-col">

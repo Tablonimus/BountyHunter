@@ -1,7 +1,6 @@
 import React from "react";
 import "./gameCard.css";
-import { Tooltip } from "flowbite-react";
-import fbi from "../../assets/images/fbi.png"
+
 
 export default function CorrectAnswer(
   id,

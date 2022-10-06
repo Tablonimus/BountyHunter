@@ -1,6 +1,6 @@
 import React from "react";
 import "./gameCard.css";
-import { Tooltip } from "flowbite-react";
+
 
 export default function Clues(
   id,
@@ -36,7 +36,7 @@ export default function Clues(
 
   return (
     <div className="wantClue">
-      <div className="mt-20 ml-6 flex flex-col text-white text-md w-72 shadow-lg bopacity-90 rounded-md">
+          <div className=" p-5 mt-8 flex flex-col text-white text-md w-72 opacity-90 rounded-md">
         <h1 className="font-bold bg-black m-1 text-2xl rounded-md opacity-70">
           CRIMINAL EXPEDIENT:
         </h1>

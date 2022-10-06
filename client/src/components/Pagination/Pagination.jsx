@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import lata from "../../assets/images/lata.png";
-import { Navbar, Button } from "flowbite-react";
-import SearchBar from "../SearchBar/SearchBar";
+import { Navbar } from "flowbite-react";
 import { getRewardCriminals } from "../../redux/actions";
 
 export default function Pagination({ criminalsPerPage, reward, pagination }) {

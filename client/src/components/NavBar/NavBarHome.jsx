@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Button } from "flowbite-react";
 import { Link } from "react-router-dom";
 import bounty from "../../assets/images/bounty.png";
-import SearchBar from "../SearchBar/SearchBar";
+
 
 export default function NavBarHome() {
   return (
