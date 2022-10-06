@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import lata from "../../assets/images/lata.png";
 import { Navbar } from "flowbite-react";
 import { getRewardCriminals } from "../../redux/actions";
+import { Link } from "react-router-dom";
 
 export default function Pagination({ criminalsPerPage, reward, pagination }) {
   const dispatch = useDispatch();
@@ -71,6 +72,7 @@ export default function Pagination({ criminalsPerPage, reward, pagination }) {
           </button>
         ))}
       </div>
+      
     </Navbar>
   );
 }
