@@ -26,8 +26,8 @@ export default function Pagination({ criminalsPerPage, reward, pagination }) {
   }
 
   return (
-    <Navbar class="w-full rounded-b-lg flex flex-row items-center bg-[#6D4A33] opacity-70 justify-center ">
-      <div className="flex ml-10">
+    <Navbar class="w-full rounded-b-lg grid items-center justify-center bg-[#6D4A33] opacity-80 ">
+      <div className="flex items-center">
         <label htmlFor="input-group-search" className="sr-only">
           Search
         </label>
@@ -57,7 +57,7 @@ export default function Pagination({ criminalsPerPage, reward, pagination }) {
         </div>
         <div className="mb-2 flex"></div>
       </div>
-      <div className="lg:ml-44">
+      <div className="">
         {pageNumbers?.map((number) => (
           <button
             key={number}
