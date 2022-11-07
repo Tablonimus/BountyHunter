@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 export function getAllCriminals() {
   return async function (dispatch) {
     try {
-      const nPage = 40;
+      const nPage = 30;
       const links = [];
       for (let i = 1; i <= nPage; i++) {
         links.push(`https://api.fbi.gov/wanted/v1/list?page=${i}`);
@@ -27,7 +27,7 @@ export function getAllCriminals() {
 export function getRewardCriminals(input) {
   return async function (dispatch) {
     try {
-      const nPage = 40;
+      const nPage = 30;
       const links = [];
       for (let i = 1; i <= nPage; i++) {
         links.push(`https://api.fbi.gov/wanted/v1/list?page=${i}`);
@@ -76,7 +76,7 @@ export function getRewardCriminals(input) {
 export function getLevel1() {
   return async function (dispatch) {
     try {
-      const nPage = 49;
+      const nPage = 30;
       const links = [];
       for (let i = 1; i <= nPage; i++) {
         links.push(`https://api.fbi.gov/wanted/v1/list?page=${i}`);

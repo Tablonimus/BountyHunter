@@ -17,11 +17,13 @@ export default function RewardCard(
     .join("")
     .trim()
     .split(" ");
- 
+  console.log(id.images);
   return (
     <div className="homeCard">
-      
-      <a href={id?.urlocal?.length >0 ?`${id.urlocal}/${id.title}`:id.url} target="_blank">
+      <a
+        href={id?.urlocal?.length > 0 ? `${id.urlocal}/${id.title}` : id.url}
+        target="_blank"
+      >
         <div className="flex  flex-col items-center justify-center">
           <Tooltip content="Go to FBI summary" placement="top" trigger="hover">
             <div className="bg--500 mt-20 h-40 w-40">
@@ -34,7 +36,7 @@ export default function RewardCard(
           </Tooltip>
           <div className=" flex flex-col items-center justify-center">
             <h5 className="text-[14px] font-bold text-black">
-              {id.title.length>20?`${id.title.slice(0, 20)}...`:id.title}
+              {id.title.length > 20 ? `${id.title.slice(0, 20)}...` : id.title}
             </h5>
             <h5 className="text-[11px] text-black font-semibold">
               {`${id.subjects?.slice(0, 50)}`}
