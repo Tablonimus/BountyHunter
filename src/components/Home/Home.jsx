@@ -16,6 +16,7 @@ export default function Home() {
   }, [dispatch]);
 
   const reward = useSelector((state) => state.rewardCriminals);
+  console.log(reward)
   //PAGINATION---
   const [currentPage, setCurrentPage] = useState(1);
   const [criminalsPerPage, setCriminalsPerPage] = useState(24);
